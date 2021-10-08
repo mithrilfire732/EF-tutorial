@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace EF_tutorial.Controllers
 {
@@ -18,7 +19,9 @@ namespace EF_tutorial.Controllers
 
         public List<Student> GetAll()
         {
-            return _context.Students.ToList();
+            return _context.Students
+                .Include(x => x.Major)
+                .ToList();
         } 
 
         public Student GetByPk(int Id)
